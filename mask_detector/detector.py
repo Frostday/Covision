@@ -22,8 +22,8 @@ while True:
     for (x, y, w, h) in faces:
         # roi_gray = gray[y:y+h, x:x+w]
         # roi_color = frame[y:y+h, x:x+w]
-        roi_gray = gray[y-30:y+h+30, x-30:x+w+30]
-        roi_color = frame[y-30:y+h+30, x-30:x+w+30]
+        roi_gray = gray[y-10:y+h+10, x-10:x+w+10]
+        roi_color = frame[y-10:y+h+10, x-10:x+w+10]
         roi_color = cv2.cvtColor(roi_color, cv2.COLOR_BGR2RGB)
         roi = cv2.resize(roi_color, (224, 224))
         roi = preprocess_input(img_to_array(roi))
@@ -35,14 +35,16 @@ while True:
             confidence = output[0][i]*100
             output = 'Mask'
             s = output + ' ' + "{:.2f}".format(confidence) + '%'
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            frame = cv2.putText(frame, s, (x, y-2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
+            # cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            cv2.rectangle(frame, (x-10, y-10), (x+w+10, y+h+10), (0, 255, 0), 2)
+            frame = cv2.putText(frame, s, (x, y-12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
         if i==1:
             confidence = output[0][i]*100
             output = 'No Mask'
             s = output + ' ' + "{:.2f}".format(confidence) + '%'
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
-            frame = cv2.putText(frame, s, (x, y-2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+            # cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+            cv2.rectangle(frame, (x-10, y-10), (x+w+10, y+h+10), (0, 0, 255), 2)
+            frame = cv2.putText(frame, s, (x, y-12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
 
         # print(output, confidence)
 
